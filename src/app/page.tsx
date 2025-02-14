@@ -18,7 +18,7 @@ const messages = [
 ]
 
 // Array of timeout lengths (in milliseconds) for each message
-const messageDelays = [3000, 2500, 3500, 4000, 3500, 5000] // Adjust these values as needed
+const messageDelays = [3000, 3000, 3500, 4000, 3500, 5000] // Adjust these values as needed
 
 export default function Home() {
   const [currentMessage, setCurrentMessage] = useState(0)
@@ -65,17 +65,42 @@ export default function Home() {
         {/* Heart icon */}
         <HeartIcon className="w-24 h-24 mx-auto text-pink-500 animate-bounce"/>
 
-        {/* Message with text effect */}
-        <div className="flex justify-center flex-wrap gap-3">
-          <TypingAnimation className="text-4xl sm:text-6xl break-words font-bold text-muted-foreground">
-            {messages[currentMessage]}
-          </TypingAnimation>
-          {
-            currentMessage === messages.length - 1 &&
-            (
-              <WordRotate words={names}  className={`text-4xl sm:text-6xl break-words font-bold text-pink-500`} />
-            )
-          }
+        {/* Render all messages up to the current one */}
+        <div className="flex flex-col items-center justify-center">
+          {messages.slice(0, currentMessage + 1).map((message, index) => {
+            const isCurrent = index === currentMessage;
+            const distanceFromCurrent = currentMessage - index;
+
+            return (
+              <div
+                key={index}
+                className={`transition-all ease-in-out duration-200 text-muted-foreground ${
+                  isCurrent
+                    ? "text-4xl sm:text-6xl font-bold "
+                    : `text-${3 - index}xl sm:text-${6 - index}xl`
+                }`}
+                style={{
+                  transform: `translateY(${distanceFromCurrent * -6}px) scale(${
+                    1 - distanceFromCurrent * 0.1
+                  })`,
+                  opacity: 1 - distanceFromCurrent * 0.2,
+                }}
+              >
+                {isCurrent && index === messages.length - 1 ? (
+                  <div className="flex justify-center flex-wrap gap-3">
+                    <TypingAnimation className="text-4xl sm:text-6xl break-words font-bold text-muted-foreground">
+                      {message}
+                    </TypingAnimation>
+                    <WordRotate words={names} className={`text-4xl sm:text-6xl break-words font-bold text-pink-500`} />
+                  </div>
+                ) : (
+                  <TypingAnimation>
+                      {message}
+                    </TypingAnimation>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {/* Buttons appear on last message */}
