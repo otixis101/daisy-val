@@ -13,10 +13,10 @@ const messages = [
   "Hola Mami, cake email?...",
   "I've been thinking...",
   "About how lucky I am to have you...",
-  "About all the little moments we've shared...",
-  "The way you make me laugh, the way you understand me...",
+  "About all the moments we've shared...",
+  "The days we laughed or argued, the way you understand me...",
   "You're my best friend, my partner, my everything...",
-  "And I wouldn't trade what we have for anything...",
+  "And I wouldn't trade Us for anything...",
   "So I wanted to ask...",
   "Will you be my",
 ]
@@ -89,7 +89,8 @@ export default function Home() {
         <video
           autoPlay
           loop
-          className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
+          className="absolute inset-0 w-full h-full object-cover opacity-30 z-0 select-none
+          "
         >
           <source src="/videos/ruin.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -139,20 +140,25 @@ export default function Home() {
           <div className="gap-4 flex flex-col items-center justify-center py-4 sm:flex-row">
 
             {/* Confetti Fireworks when accepted */}
-            {showConfetti && <ConfettiFireworks />}
-            {!showConfetti && !rejected && (
+            {showConfetti && 
+            (
               <ConfettiButton
-                onClick={handleYes}
-                className="bg-pink-500 hover:bg-pink-600 w-full max-w-xs h-fit text-white font-bold !py-4 !px-8 rounded-full transition duration-300"
+                // onClick={handleYes}
+                className="bg-pink-500 hover:bg-pink-600 w-full max-w-xs h-fit  transform active:scale-90 text-white font-bold !py-4 !px-8 rounded-full transition duration-300"
               >
-                Yes! Baby
+                Inomi? 
               </ConfettiButton>
+            )
+            }
+            {!showConfetti && !rejected && (
+              <ConfettiFireworks onButtClick={handleYes} />
+              
             )}
 
             {!showConfetti && !rejected && (
               <button
                 onClick={handleNo}
-                className="w-full max-w-xs bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-4 px-8 rounded-full transition duration-300"
+                className="w-full max-w-xs bg-gray-300 hover:bg-gray-400 text-gray-800 transform active:scale-90 font-bold py-4 px-8 rounded-full transition duration-300"
               >
                 Ewww.. No!
               </button>
@@ -161,7 +167,7 @@ export default function Home() {
             {(showConfetti || rejected) && (
               <button
                 onClick={handleRestart}
-                className="w-full max-w-xs bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-4 px-8 rounded-full transition duration-300"
+                className="w-full max-w-xs bg-gray-300 hover:bg-gray-400 text-gray-800 transform active:scale-90 font-bold py-4 px-8 rounded-full transition duration-300"
               >
                 Restart
               </button>

@@ -4,7 +4,13 @@ import confetti from "canvas-confetti";
 
 import { Button } from "@/components/ui/button";
 
-export function ConfettiFireworks() {
+
+interface Props {
+    onButtClick: () => void
+}
+
+
+export function ConfettiFireworks({onButtClick}:Props) {
     const handleClick = () => {
         const duration = 5 * 1000;
         const animationEnd = Date.now() + duration;
@@ -32,13 +38,15 @@ export function ConfettiFireworks() {
                 origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
             });
         }, 250);
+
+        onButtClick()
     };
 
     return (
-        <div className="relative w-full">
+        <div className="relative w-full max-w-xs">
             <Button onClick={handleClick}
-                className="bg-pink-500 hover:bg-pink-600 !w-full max-w-xs h-fit text-white font-bold !py-4 !px-8 rounded-full" >
-                Inomi? 
+                className="bg-pink-500 hover:bg-pink-600 !w-full max-w-xs h-fit text-white  transform active:scale-90 transition-all font-bold !py-4 rounded-full" >
+                OMG... Yes! 
             </Button>
         </div>
     );
