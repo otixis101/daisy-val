@@ -10,7 +10,7 @@ import { ConfettiButton } from "@/components/ConfettiButton"
 import { ConfettiFireworks } from "@/components/ConfettiFireWorks"
 
 const messages = [
-  "Hola Mami, cake email?...",
+  "Hola Mami...",
   "I've been thinking...",
   "About how lucky I am to have you...",
   "About all the moments we've shared...",
@@ -56,7 +56,6 @@ export default function Home() {
     "Mi amor?",
     "Manchi?",
     "Better Half?",
-    "Mi Media Naranja?",
     "Bunk-Coffin Mate?",
   ]
 
@@ -78,7 +77,7 @@ export default function Home() {
         <video
           autoPlay
           loop
-          className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
+          className="absolute inset-0 w-full h-full object-cover opacity-30 z-0 select-none pointer-events-none"
         >
           <source src="/videos/yayy.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -89,7 +88,7 @@ export default function Home() {
         <video
           autoPlay
           loop
-          className="absolute inset-0 w-full h-full object-cover opacity-30 z-0 select-none
+          className="absolute inset-0 w-full h-full object-cover opacity-30 z-0 select-none pointer-events-none
           "
         >
           <source src="/videos/ruin.mp4" type="video/mp4" />
@@ -110,9 +109,9 @@ export default function Home() {
             return (
               <div
                 key={index}
-                className={`transition-all ease-in-out duration-200 text-slate-700 ${isCurrent
-                    ? "text-3xl sm:text-6xl font-bold "
-                    : `text-${3 - index}xl sm:text-${4 - index}xl`
+                className={`transition-all ease-in-out duration-200 text-slate-700 select-none pointer-events-none ${isCurrent
+                  ? "text-3xl sm:text-6xl font-bold "
+                  : `text-${3 - index}xl sm:text-${4 - index}xl`
                   }`}
                 style={{
                   transform: `translateY(${distanceFromCurrent * -6}px) scale(${1 - distanceFromCurrent * 0.1
@@ -140,19 +139,19 @@ export default function Home() {
           <div className="gap-4 flex flex-col items-center justify-center py-4 sm:flex-row">
 
             {/* Confetti Fireworks when accepted */}
-            {showConfetti && 
-            (
-              <ConfettiButton
-                // onClick={handleYes}
-                className="bg-pink-500 hover:bg-pink-600 w-full max-w-xs h-fit  transform active:scale-90 text-white font-bold !py-4 !px-8 rounded-full transition duration-300"
-              >
-                Inomi? 
-              </ConfettiButton>
-            )
+            {showConfetti &&
+              (
+                <ConfettiButton
+                  // onClick={handleYes}
+                  className="bg-pink-500 hover:bg-pink-600 w-full max-w-xs h-fit  transform active:scale-90 text-white font-bold !py-4 !px-8 rounded-full transition duration-300"
+                >
+                  Inomi?
+                </ConfettiButton>
+              )
             }
             {!showConfetti && !rejected && (
               <ConfettiFireworks onButtClick={handleYes} />
-              
+
             )}
 
             {!showConfetti && !rejected && (
